@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config()
-const secretKey = process.env.SECRET_KEY || ''
+const secretKey = process.env.SECRET_KEY || 'useSecretKey'
 
 async function findUser(email:string){
     return await usersRepository.findUser(email)
@@ -17,7 +17,6 @@ export async function signup(newUserData:INewUser) {
 
     const cryptPassword = bcrypt.hashSync(newUserData.password, 10)
     const inserData = {
-        name:newUserData.name,
         email:newUserData.email,
         password:cryptPassword
     }
@@ -31,7 +30,7 @@ export async function signin(signinData:signinData) {
     const confirmPassword = bcrypt.compareSync(signinData.password, userData.password)
     if(!confirmPassword) throw {code:'Conflict', message:'Verifique seus dados'};
 
-    const token = jwt.sign({id:userData.id,name:userData.name},secretKey)
+    const token = jwt.sign({id:userData.id},secretKey)
 
     return(token)
 }
