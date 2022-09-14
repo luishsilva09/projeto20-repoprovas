@@ -1,28 +1,56 @@
 import client from "../dbStrategy/db";
-import { INewTest } from "../types/testData";
+import { IinsertData, INewTest } from "../types/testData";
 
-export async function insertTest(testData:INewTest){
+export async function findCategory(categoryId:number){
+    return await client.category.findUnique({
+        where:{id:categoryId}
+    })
+}
+export async function findDiscipline(disciplineId:number){
+    return await client.discipline.findUnique({
+        where:{id:disciplineId}
+    })
+}
+export async function findTeacherDiscipline(disciplineId:number){
+    return await client.teacherDiscipline.findMany({
+        where:{
+            disciplineId:disciplineId
+        }
+        })
+}
+export async function insertTest(testData:IinsertData){
     return await client.test.create({data:testData})
 }
 
 export async function getAll(){
-     const teste2 = await client.term.findMany({
+     return await client.term.findMany({
         select:{
             number:true,
             disciplines:{
                 select:{
                     id:true,
-                    name:true
+                    name:true,
+                    teacherDiscipline:{
+                        select:{
+                            teacher:{
+                                select:{name:true}
+                            },
+                            tests:{
+                                select:{
+                                    name:true,
+                                    pdfUrl:true,
+                                    category:{
+                                        select:{
+                                            id:true,
+                                            name:true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
     })
-
-    
-
-
-
-
-     return teste2
 }
-
