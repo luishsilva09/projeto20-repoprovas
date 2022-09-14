@@ -3,6 +3,7 @@ export interface INewTest {
     pdfUrl: string;
     categoryId: number;
     disciplineId:number;
+    teacherId:number;
 }
 
 export interface IinsertData {

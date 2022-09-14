@@ -11,10 +11,13 @@ export async function findDiscipline(disciplineId:number){
         where:{id:disciplineId}
     })
 }
-export async function findTeacherDiscipline(disciplineId:number){
+export async function findTeacherDiscipline(disciplineId:number,teacherId:number){
     return await client.teacherDiscipline.findMany({
         where:{
-            disciplineId:disciplineId
+            AND:{
+                disciplineId:disciplineId,
+                teacherId:teacherId
+            }
         }
         })
 }
