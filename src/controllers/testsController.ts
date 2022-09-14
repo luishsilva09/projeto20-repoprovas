@@ -8,7 +8,12 @@ export async function newTest(req:Request, res:Response){
     res.status(201).send(result)
 }
 
-export async function getAll (req:Request, res:Response ){
-    const result = await testService.getAll()
+export async function getAllByDisciplines (req:Request, res:Response ){
+    const result = await testService.getAllByDisciplines()
+    res.status(200).send(result)
+}
+
+export async function getAllByTeacher(req:Request, res:Response ) {
+    const result = await testService.getAllByTeacher()
     res.status(200).send(result)
 }

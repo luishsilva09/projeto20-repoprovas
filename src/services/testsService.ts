@@ -1,5 +1,6 @@
 import { INewTest } from "../types/testData";
 import * as testRepository from '../repositories/testRepository'
+import e from "express";
 
 
 export async function newTest(testData:INewTest){
@@ -19,7 +20,20 @@ export async function newTest(testData:INewTest){
     return await testRepository.insertTest(insertData)
      
 }
+function createResult(data:any){
+    const result = {
+        term: data.number,
+        disciplines:''
+    }
+    result.disciplines = (data.disciplines).map((e:any) =>{name:e.name})
+    return result
+}
+export async function getAllByDisciplines(){
+    const allData = await testRepository.getAllByDisciplines();
+    const result = allData.map(e => createResult(e))
+    return allData
+}
 
-export async function getAll(){
-    return await testRepository.getAll()
+export async function getAllByTeacher(){
+    return await testRepository.getAllByTeacher()
 }

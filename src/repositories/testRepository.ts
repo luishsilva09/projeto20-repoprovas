@@ -25,7 +25,7 @@ export async function insertTest(testData:IinsertData){
     return await client.test.create({data:testData})
 }
 
-export async function getAll(){
+export async function getAllByDisciplines(){
      return await client.term.findMany({
         select:{
             number:true,
@@ -55,5 +55,30 @@ export async function getAll(){
                 }
             }
         }
+    })
+}
+
+export async function getAllByTeacher(){
+    return await client.teacher.findMany({
+        select:{
+            name:true,
+            disciplines:{
+                select:{
+                    discipline:{
+                        select:{
+                            name:true
+                        }
+                    },
+                    tests:{
+                        select:{
+                            name:true,
+                            pdfUrl:true,
+                            category:true
+                            }
+
+                        }
+                    } 
+                }
+            }
     })
 }
