@@ -51,13 +51,14 @@ describe('POST /users', ()=>{
         expect(wrongPassword.status && wrongEmail.status).toBe(409);
     })
 
-    it('Empty data',async()=>{
+    it('Empty data signup/signin',async()=>{
        const signinEmpty =  await supertest(app).post('/users/signin').send('');
        const signupEmpty =  await supertest(app).post('/users/signup').send('');
 
        expect(signinEmpty.status && signupEmpty.status).toBe(422)
     })
 
+    // Testes completamente desnecessarios pois joi já valida
     it('Missing data to create new user',async ()=>{
         const {email,password,repeatPassword} = await userFactory.newUserData();
 
