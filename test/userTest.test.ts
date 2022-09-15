@@ -53,9 +53,35 @@ describe('POST /users', ()=>{
 
     it('Empty data',async()=>{
        const signinEmpty =  await supertest(app).post('/users/signin').send('');
-       const signupEmpty =  await supertest(app).post('/users/signin').send('');
+       const signupEmpty =  await supertest(app).post('/users/signup').send('');
 
        expect(signinEmpty.status && signupEmpty.status).toBe(422)
+    })
+
+    it('Missing data to create new user',async ()=>{
+        const {email,password,repeatPassword} = await userFactory.newUserData();
+
+        const sigupEmail =  await supertest(app).post('/users/signup').send({password,repeatPassword});
+        const sigupPassword =  await supertest(app).post('/users/signup').send({email,repeatPassword});
+        const sigupRepetPassword =  await supertest(app).post('/users/signup').send({email,password});
+
+        expect(sigupEmail.status && sigupPassword.status && sigupRepetPassword.status).toBe(422)
+    })
+    it('Missing data to login',async ()=>{
+        const {email,password,repeatPassword} = await userFactory.newUserData();
+
+        const siginEmail =  await supertest(app).post('/users/signup').send({password,repeatPassword});
+        const siginPassword =  await supertest(app).post('/users/signup').send({email,repeatPassword});
+
+        expect(siginEmail.status && siginPassword.status).toBe(422)
+    })
+
+    it('Wrong repeat password', async ()=> {
+        const {email,password} = await userFactory.newUserData();
+
+        const sigup =  await supertest(app).post('/users/signup').send({email, password,repeatPassword:faker.internet.password()});
+
+        expect(sigup.status).toBe(422)
     })
 })
 
