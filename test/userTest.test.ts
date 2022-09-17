@@ -21,12 +21,8 @@ describe("POST /users", () => {
     const userData = await userFactory.newUserData();
 
     const result = await supertest(app).post("/users/signup").send(userData);
-    const createdUser = await client.user.findUnique({
-      where: { email: userData.email },
-    });
 
     expect(result.status).toBe(201);
-    expect(createdUser).not.toBeNull();
   });
   it("Exist email conflict", async () => {
     const userData = await userFactory.newUserData();
