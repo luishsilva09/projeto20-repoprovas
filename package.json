@@ -6,7 +6,7 @@
   "scripts": {
     "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test -- jest -i ",
     "dev": "nodemon ./src/server.ts",
-    "start": "node dist/server.js",
+    "start": "node dist/src/server.js",
     "build": "tsc && npx prisma migrate deploy"
   },
   "keywords": [],
