@@ -15,7 +15,7 @@ export default async function validToken(
 
   const token = authorization.replace("Bearer ", "");
   jwt.verify(token, secretKey, function (err, decode) {
-    if (err) throw { code: "Invalid", message: err.message };
+    if (err) throw { code: "Unauthorized", message: err.message };
   });
 
   next();

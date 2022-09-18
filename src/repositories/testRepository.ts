@@ -17,8 +17,10 @@ export async function findTeacherDiscipline(
 ) {
   return await client.teacherDiscipline.findMany({
     where: {
-      disciplineId: disciplineId,
-      teacherId: teacherId,
+      AND: {
+        disciplineId: disciplineId,
+        teacherId: teacherId,
+      },
     },
   });
 }

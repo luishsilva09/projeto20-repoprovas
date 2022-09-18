@@ -1,6 +1,5 @@
 import { INewTest } from "../types/testData";
 import * as testRepository from "../repositories/testRepository";
-import e from "express";
 
 export async function newTest(testData: INewTest) {
   const existCategory = await testRepository.findCategory(testData.categoryId);

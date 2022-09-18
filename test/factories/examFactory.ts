@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-export async function createTestData() {
+export function createTestData() {
   const data = {
     name: faker.name.firstName(),
     pdfUrl: faker.internet.url(),
@@ -9,4 +9,14 @@ export async function createTestData() {
     teacherId: 1,
   };
   return data;
+}
+
+export function userDataCreate() {
+  const password = faker.internet.password(8);
+  const userData = {
+    email: faker.internet.email(),
+    password: password,
+    repeatPassword: password,
+  };
+  return userData;
 }

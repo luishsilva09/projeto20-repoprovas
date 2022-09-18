@@ -1,8 +1,8 @@
-import express from 'express';
-import cors from 'cors';
-import 'express-async-errors';
-import routes from './routes/index';
-import errorHandle from './middlewares/errorHandle';
+import express from "express";
+import cors from "cors";
+import "express-async-errors";
+import routes from "./routes/index";
+import errorHandle from "./middlewares/errorHandle";
 
 const app = express();
 
