@@ -17,7 +17,7 @@
 
 # Description
 
-RepoProvas is going to meke esier to find test done for your study, could be use in school systen to facilite the process.
+RepoProvas is going to make easier to find test done for your study, could be use in school systen to facilite the process.
 
 # Features
 
@@ -233,6 +233,13 @@ Configuration and create database
 
 ```
 
+To run
+
+```bash
+npm run build
+npm start
+```
+
 ## Environment Variables
 
 To run this project in local, you will need to add the following environment variables to your .env file
@@ -245,7 +252,7 @@ To run this project in local, you will need to add the following environment var
 
 You can run this systen using a URL https://repoprovas-projeto.herokuapp.com/
 
-To make easier you could use this database for the tests `postgres://zzosyinwzhydoj:ee00c39321288aa2230d7ab0eb1caed5cf45a801dbdfa5c58df7e2606ac68116@ec2-34-200-205-45.compute-1.amazonaws.com:5432/ddr6meq246ohts`
+To make easier you could use this database for the tests you should use the heroku aplication.
 
 ## Authors
 
