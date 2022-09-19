@@ -23,19 +23,44 @@ export async function newTest(testData: INewTest) {
   return await testRepository.insertTest(insertData);
 }
 function createResult(data: any) {
-  const result = {
+  const result: { term: number; disciplines: Array<object> } = {
     term: data.number,
-    disciplines: "",
+    disciplines: [],
   };
-  result.disciplines = data.disciplines.map((e: any) => {
-    name: e.name;
-  });
+  if (data.disciplines.length === 0) return data;
+
+  for (let i = 0; i < data.disciplines.length; i++) {
+    const teste: { name: string; testsCategories: Array<object> } = {
+      name: data.disciplines[i].name,
+      testsCategories: [],
+    };
+    result.disciplines.push(teste);
+    for (
+      let j = 0;
+      j < data.disciplines[i].teacherDiscipline[0].tests.length;
+      j++
+    ) {
+      const testsTeacher = {
+        ...data.disciplines[i].teacherDiscipline[0].tests[j].category,
+        test: [
+          {
+            name: data.disciplines[i].teacherDiscipline[0].tests[j].name,
+            pdfUrl: data.disciplines[i].teacherDiscipline[0].tests[j].pdfUrl,
+            teacher: data.disciplines[i].teacherDiscipline[0].teacher.name,
+          },
+        ],
+      };
+
+      teste.testsCategories.push(testsTeacher);
+    }
+  }
+
   return result;
 }
 export async function getAllByDisciplines() {
   const allData = await testRepository.getAllByDisciplines();
   const result = allData.map((e) => createResult(e));
-  return allData;
+  return result;
 }
 
 export async function getAllByTeacher() {

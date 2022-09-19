@@ -7,7 +7,9 @@ import * as userFactory from "../test/factories/userDataFactory";
 beforeEach(async () => {
   await client.$executeRaw`TRUNCATE TABLE users;`;
 });
-
+afterAll(async () => {
+  await client.$disconnect();
+});
 describe("POST /users", () => {
   it("Create new user", async () => {
     const userData = await userFactory.newUserData();
@@ -98,8 +100,4 @@ describe("POST /users", () => {
 
   // //   expect(sigup.status).toBe(422);
   // // });
-});
-
-afterAll(async () => {
-  await client.$disconnect();
 });
